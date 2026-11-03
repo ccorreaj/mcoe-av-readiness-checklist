@@ -25,7 +25,7 @@ device, and clearing browser data removes them. Use **Save progress file** to ke
 a copy or share it with colleagues, and **Export table (CSV)** to get the full table.
 
 ## Feedback
-Open an issue in this repository, or email mobilitycoe@g.ucla.edu
+Open an issue in this repository, or email mobilitycoe@ucla.edu
 
 Changes to checklist content are made in the Excel workbook first, then applied to
 this page. Pull requests are reviewed before anything is merged.
