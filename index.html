@@ -48,6 +48,20 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sign-count{font:800 22px/1 var(--f-body);font-variant-numeric:tabular-nums}
 .sign-count small{font-size:13px;font-weight:400;color:var(--on-sign-soft)}
 .sign-note{font-size:12px;color:var(--on-sign-soft);max-width:34ch}
+.fbk{display:inline-block;margin-top:4px;background:var(--on-sign);color:var(--sign);border-radius:5px;padding:6px 12px;font-weight:700;font-size:13px;text-decoration:none}
+.fbk:hover{text-decoration:underline}
+.site-foot{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px;font-size:12.5px;color:var(--muted)}
+.site-foot>div{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;min-width:0}
+.site-foot img{display:block;height:20px;max-width:100%}
+.mail{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center}
+.mail .btn{min-height:26px;padding:2px 8px;font-size:12px}
+.contact{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:8px;max-width:75ch}
+.contact p{margin:0}
+.contact ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.hear{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:22;width:min(360px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--sign);border-radius:8px;padding:12px 14px;box-shadow:0 4px 16px rgba(0,0,0,.25);display:grid;gap:8px}
+.hear h2{margin:0;font-size:16px;font-weight:800}
+.hear p{margin:0;font-size:13px}
+.hear .row a.btn{text-decoration:none;display:inline-flex;align-items:center}
 
 /* Tabs */
 .tabs{display:flex;gap:6px;overflow-x:auto;padding:2px}
@@ -173,6 +187,15 @@ tr.flash td{animation:fl 2.2s ease-out}
 </style>
 </head>
 <body>
+<script>
+/* Site links. Paste each Google Form link between the quotes. A link left empty hides its buttons. */
+const SITE={
+  contactEmail:'mobilitycoe@ucla.edu',
+  feedbackForm:'https://docs.google.com/forms/d/e/1FAIpQLScCSkgHOn2eTl8VD-H_2FcQalrp5ogTfr_rZkWEUPLf6imwzQ/viewform',
+  hearForm:'https://docs.google.com/forms/d/e/1FAIpQLSedzq9oG8F0iFZ8wmz5wt92d4Nzz_3V0rKDGIIL8l3pvGNeWw/viewform',
+  counterImage:'https://hitscounter.dev/api/hit?url=https%3A%2F%2Fccorreaj.github.io%2Fmcoe-av-readiness-checklist%2F&label=Visitor+Counter&icon=github&color=%230f5132&message=&style=flat&tz=PST8PDT'
+};
+</script>
 <div class="wrap">
   <header class="sign"><div class="sign-in">
     <div class="sign-t">
@@ -182,10 +205,12 @@ tr.flash td{animation:fl 2.2s ease-out}
     <div class="sign-s">
       <div class="sign-count"><span id="cAns">0</span> <small>of <span id="cTot">0</span> items assessed</small></div>
       <div class="sign-note" id="saveNote" role="status"></div>
+      <a class="fbk" id="fbkTop" target="_blank" rel="noopener noreferrer" hidden>Send feedback</a>
     </div>
   </div></header>
   <nav class="tabs" id="tabs" aria-label="Checklist sections"></nav>
   <main id="main" style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px;min-width:0"></main>
+  <footer class="site-foot" id="foot"></footer>
 </div>
 <button class="backpill" id="back" hidden></button>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -349,13 +374,52 @@ function renderAbout(){
   const R=D.readme;
   $('main').replaceChildren(h('div',{cls:'about'},
     h('section',{cls:'lede'},h('h2',{},'How to use'),R.slice(3,6).map(t=>h('p',{},t)),h('h2',{},'Scope'),R.slice(7).map(t=>h('p',{},t)),
-      h('p',{},'This page holds no accounts or database. What you enter stays in this browser on this device, so clearing browser data removes it. Save a progress file to keep a copy or pass it to a colleague, who can load it here.')),
+      h('h2',{},'Your data'),h('p',{},'Your checklist entries are never sent anywhere. They stay in this browser on this device, so clearing browser data removes them. Save a progress file to keep a copy or pass it to a colleague, who can load it here.'),
+      h('p',{},'The feedback and contact forms are optional Google Forms, and the visitor counter at the bottom of the page is provided by hitscounter.dev.')),
+    contactBlock(),
     h('section',{},h('h2',{},'Readiness framework'),h('div',{cls:'fw'},dom.sort((a,b)=>a.code.localeCompare(b.code)).map(d=>h('section',{},h('h3',{},h('a',{href:'#'+d.code,onclick:e=>{e.preventDefault();go(d.code,true)}},d.t)),h('ul',{},d.subs.map(s=>h('li',{},s))))))),
     h('section',{},h('h2',{},'Glossary'),h('dl',{cls:'gl'},D.glossary.map(g=>[h('dt',{},g[0]),h('dd',{},g[1]),g[2]?h('dd',{cls:'n'},g[2]):null])))))}
 
 function renderDomain(){const d=D.domains.find(x=>x.code===view);
   $('main').replaceChildren(actions(),h('h2',{style:'margin:0;font-size:17px;font-weight:800',id:'dtitle'},d.code+'. '+d.name),h('div',{id:'listHost'}));
   renderTable();refreshHeader()}
+
+const ext=(url,text,cls)=>url?h('a',{href:url,target:'_blank',rel:'noopener noreferrer',cls:cls||null},text):null;
+function mailBlock(){
+  const e=SITE.contactEmail;
+  return h('span',{cls:'mail'},h('a',{href:'mailto:'+e},e),h('button',{cls:'btn',type:'button','aria-label':'Copy email address',onclick:ev=>{
+    const b=ev.currentTarget;const done=()=>{b.textContent='Copied';setTimeout(()=>{b.textContent='Copy'},2000)};
+    try{navigator.clipboard.writeText(e).then(done,()=>sel(b))}catch(x){sel(b)}}},'Copy'))
+  function sel(b){const a=b.previousSibling;const r=document.createRange();r.selectNodeContents(a);const s=getSelection();s.removeAllRanges();s.addRange(r)}}
+function contactBlock(){
+  return h('section',{cls:'contact',id:'contact'},h('h2',{style:'margin:0;font-size:17px;font-weight:800'},'Contact us'),
+    h('p',{},'Questions about the checklist or the Mobility COE: ',mailBlock()),
+    (SITE.feedbackForm||SITE.hearForm)?h('ul',{},
+      SITE.feedbackForm?h('li',{},ext(SITE.feedbackForm,'Send feedback'),': report an error or send a question or suggestion.'):null,
+      SITE.hearForm?h('li',{},ext(SITE.hearForm,'We want to hear from you'),': tell us who you are and how you use the checklist.'):null):null)}
+function initSite(){
+  const top=$('fbkTop');if(SITE.feedbackForm){top.href=SITE.feedbackForm;top.hidden=false}
+  $('foot').replaceChildren(
+    h('div',{},h('span',{},'Contact: ',mailBlock()),ext(SITE.feedbackForm,'Send feedback'),ext(SITE.hearForm,'We want to hear from you')),
+    h('div',{},h('span',{},'Mobility COE · v'+D.version),SITE.counterImage?h('img',{src:SITE.counterImage,alt:'Visitor counter',loading:'eager',referrerpolicy:'no-referrer-when-downgrade'}):null))}
+function maybeHear(){
+  if(!SITE.hearForm)return;
+  const k1=KEY+'-hear-off',k2=KEY+'-hear-shown';let off=false,shown=false;
+  try{off=localStorage.getItem(k1)==='1'}catch(e){}
+  try{shown=sessionStorage.getItem(k2)==='1'}catch(e){}
+  if(off||shown)return;
+  setTimeout(()=>{
+    try{sessionStorage.setItem(k2,'1')}catch(e){}
+    const close=()=>{card.remove();removeEventListener('keydown',esc)};
+    const esc=e=>{if(e.key==='Escape')close()};
+    const card=h('div',{cls:'hear',role:'dialog','aria-modal':'false','aria-labelledby':'hearT'},
+      h('h2',{id:'hearT'},'We want to hear from you!'),
+      h('p',{},'Tell us who you are and how you use the checklist. Every question is optional.'),
+      h('div',{cls:'row'},
+        h('a',{cls:'btn go',href:SITE.hearForm,target:'_blank',rel:'noopener noreferrer',onclick:close},'Share your info'),
+        h('button',{cls:'btn',type:'button',onclick:close},'Not now'),
+        h('button',{cls:'btn',type:'button',onclick:()=>{try{localStorage.setItem(k1,'1')}catch(e){}close()}},"Don't show again")));
+    document.body.append(card);addEventListener('keydown',esc)},4000)}
 function rerender(){if(view==='summary')renderSummary();else if(view==='about')renderAbout();else renderDomain();refreshHeader();markTabs()}
 
 let curHash=null;
@@ -396,7 +460,9 @@ $('imp').addEventListener('change',e=>{const f=e.target.files[0];e.target.value=
 
 $('eyebrow').textContent='v'+D.version+' · '+D.readme[1];
 load();buildTabs();save();
+initSite();
 const start=location.hash.slice(1);curHash=start||null;route(start||'A');
+maybeHear();
 </script>
 </body>
 </html>
