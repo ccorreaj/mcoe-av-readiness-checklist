@@ -22,7 +22,9 @@ not a set of strict requirements, a compliance audit, or a pass-fail score.
 ## Your data
 This page has no accounts or database. Your entries stay in your browser on your
 device, and clearing browser data removes them. Use **Save progress file** to keep
-a copy or share it with colleagues, and **Export table (CSV)** to get the full table.
+a copy or share it with colleagues, and **Download Excel workbook** to get the full table.
+
+Note: Use Save progress file to keep a copy or share it with colleagues, and Download Excel workbook to get the checklist workbook with your entries filled in.
 
 The feedback and contact forms below are optional Google Forms, and the visitor
 counter on the page is provided by hitscounter.dev.
