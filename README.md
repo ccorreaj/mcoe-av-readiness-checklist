@@ -4,9 +4,9 @@ Mobility COE AV-Scale Readiness Checklist
 An interactive version of the checklist from the Mobility Center of Excellence
 (Center of Excellence on New Mobility and Automated Vehicles).
 
-**Open the checklist:** https://ccorreaj.github.io/mcoe-av-readiness-checklist/
+**Open the checklist:** [AV-Scale v1.0](https://ccorreaj.github.io/mcoe-av-readiness-checklist/)
 
-**Download the report and Excel workbook:** [TBD]
+**Download the AV-Scale Companion Report:** [TBD]
 
 ## About
 The checklist helps state and local agencies assess their readiness for at-scale
@@ -24,8 +24,13 @@ This page has no accounts or database. Your entries stay in your browser on your
 device, and clearing browser data removes them. Use **Save progress file** to keep
 a copy or share it with colleagues, and **Export table (CSV)** to get the full table.
 
+The feedback and contact forms below are optional Google Forms, and the visitor
+counter on the page is provided by hitscounter.dev.
+
 ## Feedback
-Open an issue in this repository, or email mobilitycoe@ucla.edu
+- **Send feedback:** [Feedback form](https://docs.google.com/forms/d/e/1FAIpQLScCSkgHOn2eTl8VD-H_2FcQalrp5ogTfr_rZkWEUPLf6imwzQ/viewform) to report an error or send a question or suggestion.
+- **We want to hear from you:** [Contact form](https://docs.google.com/forms/d/e/1FAIpQLSedzq9oG8F0iFZ8wmz5wt92d4Nzz_3V0rKDGIIL8l3pvGNeWw/viewform) to tell us who you are and how you use the checklist.
+- Open an issue in this repository, or email mobilitycoe@ucla.edu
 
 Changes to checklist content are made in the Excel workbook first, then applied to
 this page. Pull requests are reviewed before anything is merged.
