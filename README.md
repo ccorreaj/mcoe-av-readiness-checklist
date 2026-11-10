@@ -33,7 +33,7 @@ counter on the page is provided by hitscounter.dev.
 - Open an issue in this repository, or email mobilitycoe@ucla.edu
 
 Changes to checklist content are made in the Excel workbook first, then applied to
-this page. Pull requests are reviewed before anything is merged.
+this page. 
 
 ## About the Center of Excellence on New Mobility and Automated Vehicles
 The Center of Excellence on New Mobility and Automated Vehicles focuses on the impacts of new mobility technologies and highly automated vehicles on the evolving transportation system when deployed at scale. Launched in 2023, the center studies the anticipated long-term impacts of increased new mobility technologies and services on land use, real estate and urban design; transportation system optimization; access to mobility and job participation; and municipal budgets and cost-effective allocation of public resources. Established through a cooperative agreement between the Federal Highway Administration and UCLA, the Mobility COE is made up of five core partners and a community of practice from academia and nonprofit organizations. www.mobilitycoe.org
