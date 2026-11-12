@@ -50,6 +50,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sign-note{font-size:12px;color:var(--on-sign-soft);max-width:34ch}
 .fbk{display:inline-block;margin-top:4px;background:var(--on-sign);color:var(--sign);border-radius:5px;padding:6px 12px;font-weight:700;font-size:13px;text-decoration:none}
 .fbk:hover{text-decoration:underline}
+.sign-title{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
+.proj{border:1.5px solid var(--on-sign);color:var(--on-sign);border-radius:5px;padding:5px 11px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;margin-top:2px}
+.proj:hover{background:var(--on-sign);color:var(--sign)}
+.proj:focus-visible{outline-color:var(--on-sign)}
 .site-foot{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px;font-size:12.5px;color:var(--muted)}
 .site-foot>div{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;min-width:0}
 .site-foot img{display:block;height:20px;max-width:100%}
@@ -200,7 +204,10 @@ const SITE={
   <header class="sign"><div class="sign-in">
     <div class="sign-t">
       <div class="eyebrow" id="eyebrow"></div>
-      <h1>AV At-Scale Deployment Readiness Checklist</h1>
+      <div class="sign-title">
+        <h1>AV At-Scale Deployment Readiness Checklist</h1>
+        <a class="proj" href="https://mobilitycoe.org/project/av-scale-readiness-checklist/" target="_blank" rel="noopener noreferrer">Project page and report <span aria-hidden="true">↗</span><span class="sr"> (opens the Mobility COE project page in a new tab)</span></a>
+      </div>
     </div>
     <div class="sign-s">
       <div class="sign-count"><span id="cAns">0</span> <small>of <span id="cTot">0</span> items assessed</small></div>
