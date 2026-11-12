@@ -50,6 +50,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sign-note{font-size:12px;color:var(--on-sign-soft);max-width:34ch}
 .fbk{display:inline-block;margin-top:4px;background:var(--on-sign);color:var(--sign);border-radius:5px;padding:6px 12px;font-weight:700;font-size:13px;text-decoration:none}
 .fbk:hover{text-decoration:underline}
+.sign-btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px}
+.sign-btns .fbk,.sign-btns .proj{margin-top:0}
 .sign-title{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
 .proj{border:1.5px solid var(--on-sign);color:var(--on-sign);border-radius:5px;padding:5px 11px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;margin-top:2px}
 .proj:hover{background:var(--on-sign);color:var(--sign)}
@@ -212,7 +214,10 @@ const SITE={
     <div class="sign-s">
       <div class="sign-count"><span id="cAns">0</span> <small>of <span id="cTot">0</span> items assessed</small></div>
       <div class="sign-note" id="saveNote" role="status"></div>
-      <a class="fbk" id="fbkTop" target="_blank" rel="noopener noreferrer" hidden>Send feedback</a>
+      <div class="sign-btns">
+        <a class="fbk" id="fbkTop" target="_blank" rel="noopener noreferrer" hidden>Send feedback</a>
+        <a class="proj" id="hearTop" target="_blank" rel="noopener noreferrer" hidden>We want to hear from you!</a>
+      </div>
     </div>
   </div></header>
   <nav class="tabs" id="tabs" aria-label="Checklist sections"></nav>
@@ -409,6 +414,7 @@ function contactBlock(){
       SITE.hearForm?h('li',{},ext(SITE.hearForm,'We want to hear from you'),': tell us who you are and how you use the checklist.'):null):null)}
 function initSite(){
   const top=$('fbkTop');if(SITE.feedbackForm){top.href=SITE.feedbackForm;top.hidden=false}
+  const ht=$('hearTop');if(SITE.hearForm){ht.href=SITE.hearForm;ht.hidden=false}
   $('foot').replaceChildren(
     h('div',{},h('span',{},'Contact: ',mailBlock()),ext(SITE.feedbackForm,'Send feedback'),ext(SITE.hearForm,'We want to hear from you')),
     h('div',{},h('span',{},'Mobility COE · v'+D.version),SITE.counterImage?h('img',{src:SITE.counterImage,alt:'Visitor counter',loading:'eager',referrerpolicy:'no-referrer-when-downgrade'}):null))}
