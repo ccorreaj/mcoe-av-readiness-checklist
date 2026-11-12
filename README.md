@@ -6,7 +6,8 @@ An interactive version of the checklist from the Mobility Center of Excellence
 
 **Open the checklist:** [AV-Scale v1.0](https://ccorreaj.github.io/mcoe-av-readiness-checklist/)
 
-**Download the AV-Scale Companion Report:** [TBD]
+**Download the AV-Scale Companion Report:** [Mobility COE website](https://mobilitycoe.org/project/av-scale-readiness-checklist/)
+
 
 ## About
 The checklist helps state and local agencies assess their readiness for at-scale
